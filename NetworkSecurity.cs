@@ -5,8 +5,36 @@ using System.Security.Cryptography;
 using System.Text;
 using UnityEngine;
 
-// Cryptics available in this class: SHA256 Hash, SHA512 Hash, MD5 Hash, Rijndael Encryption and Decryption (PBKDF2).
+/*
+    Cryptics available in this class: SHA256 Hash, SHA512 Hash, MD5 Hash, Rijndael Encryption and Decryption using keyphrase (PBKDF2).
+    
+    Usage:
 
+    Sha256(string)          -> returns sha256 encrypted hash
+    Sha512(string)          -> returns sha512 encrypted hash
+    Md5(string)             -> returns Md5 hash
+    Encrypt(string, string) -> returns encrypted string with passphrase as lock. first string is the string which gets encrypted, second is the passphrase.
+    Decrypt(string, string) -> returns decrypted string locked by passphrase. dirst ist the string to decrypt, second the passphrase.
+
+    examples:
+
+    sha256:     string hashedString = NetworkSecurity.Sha256(string);
+    sha512:     string hashedString = NetworkSecurity.Sha512(string);
+    Md5:        string md5String = NetworkSecurity.Md5(string);
+    Rijndael:   string lockedString = NetworkSecurity.Encrypt(string, passphrase);
+                string unlockedString = NetworkSecurity.Decrypt(lockedString, passphrase);
+
+    Hint:
+
+    Using a sha512 hash as a Rijndael passphrase is a extreme but efficient way to keep your networkstream secure. To bruteforce this whould need more than 100 years.
+    Also keep in mind, that strings that are locked cant be reverted without the right passphrase. So if you try to encrypt files, be sure to remember the passphrase 
+    or your file is lost ! 
+
+    Credits:
+
+    This little script is created by S. Großmann on April 2020. You may use it for your programs but please keep this comment in. Thanks. 
+
+*/
 public class NetworkSecurity : MonoBehaviour
 {
 
